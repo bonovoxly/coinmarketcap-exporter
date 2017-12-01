@@ -2,7 +2,7 @@
 
 A prometheus exporter for <https://coinmarketcap.com/>.
 
-Just a fun little demo, to both get more familiar with the Prometheus Exporter code and track some metrics on Bitcoin and Cryptocurrencies. 
+Just a fun little demo, to both get more familiar with the Prometheus Exporter code and track some metrics on Bitcoin and Cryptocurrencies. This grabs the JSON data from the Coinmarketcap API and presents them as metrics for Prometheus.
 
 # Developing
 
