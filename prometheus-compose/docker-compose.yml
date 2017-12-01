@@ -1,0 +1,23 @@
+version: '2'
+volumes:
+    prometheus_data: {}
+    grafana_data: {}
+services:
+  prometheus:
+    image: prom/prometheus:latest
+    volumes:
+      - ./prometheus.yml:/etc/prometheus/prometheus.yml
+      - prometheus_data:/prometheus
+    ports:
+      - 127.0.0.0.1:9090:9090
+  grafana:
+    depends_on:
+      - prometheus
+    image: grafana/grafana:latest
+    ports:
+      - 127.0.0.1:3000:3000
+    volumes:
+      - grafana_data:/var/lib/grafana
+  coinmarketcap-exporter:
+    image: coinmarketcap-exporter:latest
+

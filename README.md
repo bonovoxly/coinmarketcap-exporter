@@ -24,6 +24,22 @@ docker run --rm -p 127.0.0.1:9101:9101 coinmarketcap-exporter:latest
 docker run --rm -it --entrypoint=/bin/bash -p 127.0.0.1:9101:9101 -v ${PWD}:/opt/coinmarketcap-exporter coinmarketcap-exporter:latest
 ```
 
+- Then to launch:
+
+```
+python coinmarketcap.py
+```
+
+# Testing the Prometheus Grafana Stack
+
+- In the `prometheus-compose` directory, run:
+
+```
+docker-compose up
+```
+
+- Then connect to Grafana (http://localhost:3000) or Prometheus (http://localhost:9090). Add Prometheus as a Datasource and Create Grafana dashboards.
+
 # Thanks and Links
 
 - Coinmarketcap API link - <https://coinmarketcap.com/api/>
