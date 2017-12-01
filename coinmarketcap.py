@@ -20,32 +20,25 @@ class CoinCollector():
     self.endpoint = 'https://api.coinmarketcap.com/v1/ticker/'
 
   def collect(self):
-    # Get the API data
-    #requests.get("http://127.0.0.1").elapsed.total_seconds()
-    #response = json.loads(requests.get(self.endpoint).content.decode('UTF-8'))
+    # query the api
     r = requests.get(self.endpoint)
     request_time = r.elapsed.total_seconds()
     log.info('elapsed time -' + str(request_time))
     response = json.loads(r.content.decode('UTF-8'))
+    # setup the metric
     metric = Metric('coinmarketcap_response_time', 'Total time for the coinmarketcap API to respond.', 'summary')
+    # add the response time as a metric
     metric.add_sample('coinmarketcap_response_time', value=float(request_time), labels={'name': 'coinmarketcap.com'})
     yield metric
     for each in response:
-      coin = '_'.join(['coin_market', each['symbol']]) 
+      coin = ' - '.join(['coin_market', each['symbol']]) 
       description = 'The market statistics of: ' + each['name']
+      # another metric
       metric = Metric(coin, description, 'summary')
       for that in ['price_usd', 'price_btc', '24h_volume_usd', 'market_cap_usd', 'available_supply', 'total_supply', 'percent_change_1h', 'percent_change_24h', 'percent_change_7d']:
-        metric.add_sample('_'.join([coin, that]), value=float(each[that]), labels={'id': each['id'], 'name': each['name'], 'symbol': each['symbol']})
+        # get the values for this particular coin
+        metric.add_sample('_'.join(['coin_market', that]), value=float(each[that]), labels={'id': each['id'], 'name': each['name'], 'symbol': each['symbol']})
       yield metric
-
-#    # Get the requests duration
-#    metric = Metric('svc_requests_duration_seconds',
-#      'Requests time taken in seconds', 'summary')
-#    metric.add_sample('svc_requests_duration_seconds_count',
-#      value=response['requests_handled'], labels={})
-#    metric.add_sample('svc_requests_duration_seconds_sum',
-#      value=response['requests_duration_milliseconds'] / 1000.0, labels={})
-#    yield metric
 
 if __name__ == '__main__':
   try:
