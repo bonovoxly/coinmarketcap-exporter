@@ -1,8 +1,10 @@
 # coinmarketcap-exporter
 
-A prometheus exporter for <https://coinmarketcap.com/>.
+A prometheus exporter for <https://coinmarketcap.com/>. Provides Prometheus metrics from the API endpoint of Coinmarketcap, such as US price, Bitcoin price, trading volume, etc.
 
-Just a fun little demo, to both get more familiar with the Prometheus Exporter code and track some metrics on Bitcoin and Cryptocurrencies. This grabs the JSON data from the Coinmarketcap API and presents them as metrics for Prometheus.
+When running this exporter with both Prometheus and Grafana, you can create dashboards like:
+
+![coinmarketcap-single-dashboard](https://github.com/bonovoxly/coinmarketcap-exporter/raw/master/img/coinmarketcap.png "coinmarketcap-exporter with Prometheus and Grafana")
 
 # Developing
 
