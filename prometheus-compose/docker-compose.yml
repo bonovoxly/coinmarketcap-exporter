@@ -26,5 +26,5 @@ services:
     volumes:
       - ./init.sh:/opt/init.sh
   coinmarketcap-exporter:
-    image: coinmarketcap-exporter:latest
+    image: bcawthra/coinmarketcap-exporter:latest
 
