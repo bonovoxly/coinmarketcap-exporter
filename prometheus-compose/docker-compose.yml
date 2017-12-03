@@ -18,6 +18,13 @@ services:
       - 127.0.0.1:3000:3000
     volumes:
       - grafana_data:/var/lib/grafana
+  grafana_init:
+    entrypoint: "/opt/init.sh"
+    depends_on:
+      - grafana
+    image: grafana/grafana:latest
+    volumes:
+      - ./init.sh:/opt/init.sh
   coinmarketcap-exporter:
     image: coinmarketcap-exporter:latest
 

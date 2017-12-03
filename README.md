@@ -38,7 +38,13 @@ python coinmarketcap.py
 docker-compose up
 ```
 
-- Then connect to Grafana (http://localhost:3000) or Prometheus (http://localhost:9090). Add Prometheus as a Datasource and Create Grafana dashboards.
+- Go to <http://localhost:3000>.  Log in as `admin/admin`. 
+- To import the dashboard, click the "Home" button at the top, then on the right, click "Import Dashboard".
+- Enter `3890` in the "Grafana.com Dashboard" field.
+- Select the "prometheus" data source.
+- Modify the other settings as preferred. Click "Import".
+- The new dashboard should be selectable and found at <http://localhost:3000/dashboard/db/coinmarketcap-single>.
+- The Prometheus interface can be accessed at <http://localhost:9090>
 
 # Thanks and Links
 
