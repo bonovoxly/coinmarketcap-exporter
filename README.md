@@ -2,7 +2,7 @@
 
 A prometheus exporter for <https://coinmarketcap.com/>. Provides Prometheus metrics from the API endpoint of Coinmarketcap, such as US price, Bitcoin price, trading volume, etc.
 
-When running this exporter with both Prometheus and Grafana, you can create dashboards like:
+When running this exporter with both Prometheus and Grafana, [you can create dashboards like](https://grafana.com/dashboards/3890):
 
 ![coinmarketcap-single-dashboard](https://github.com/bonovoxly/coinmarketcap-exporter/raw/master/img/coinmarketcap.png "coinmarketcap-exporter with Prometheus and Grafana")
 
@@ -53,6 +53,7 @@ docker-compose up
 - Coinmarketcap API link - <https://coinmarketcap.com/api/>
 - Prometheus exporters - <https://prometheus.io/docs/instrumenting/writing_exporters/>
 - Writing JSON exporters in Python from Robust Perception - <https://www.robustperception.io/writing-json-exporters-in-python/>
+- Grafana Dashboard - <https://grafana.com/dashboards/3890>
 
 If you find this useful and want to contribute:
 
