@@ -31,13 +31,11 @@ class CoinCollector():
     metric.add_sample('coinmarketcap_response_time', value=float(request_time), labels={'name': 'coinmarketcap.com'})
     yield metric
     for each in response:
-      coin = ' - '.join(['coin_market', each['symbol']]) 
-      description = 'The market statistics of: ' + each['name']
-      # another metric
-      metric = Metric(coin, description, 'summary')
       for that in ['price_usd', 'price_btc', '24h_volume_usd', 'market_cap_usd', 'available_supply', 'total_supply', 'percent_change_1h', 'percent_change_24h', 'percent_change_7d']:
-        # get the values for this particular coin
-        metric.add_sample('_'.join(['coin_market', that]), value=float(each[that]), labels={'id': each['id'], 'name': each['name'], 'symbol': each['symbol']})
+        coinmarketmetric = '_'.join(['coin_market', that])
+        description = 'The value of ' + that
+        metric = Metric(coinmarketmetric, description, 'summary')
+        metric.add_sample(coinmarketmetric, value=float(each[that]), labels={'id': each['id'], 'name': each['name'], 'symbol': each['symbol']})
       yield metric
 
 if __name__ == '__main__':
