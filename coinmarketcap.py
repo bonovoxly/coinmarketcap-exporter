@@ -34,7 +34,8 @@ class CoinCollector():
     for each in response:
       for that in ['rank', 'price_usd', 'price_btc', '24h_volume_usd', 'market_cap_usd', 'available_supply', 'total_supply', 'percent_change_1h', 'percent_change_24h', 'percent_change_7d']:
         coinmarketmetric = '_'.join(['coin_market', that])
-        metric.add_sample(coinmarketmetric, value=float(each[that]), labels={'id': each['id'], 'name': each['name'], 'symbol': each['symbol']})
+        if each[that] is not None:
+          metric.add_sample(coinmarketmetric, value=float(each[that]), labels={'id': each['id'], 'name': each['name'], 'symbol': each['symbol']})
     yield metric
 
 if __name__ == '__main__':
