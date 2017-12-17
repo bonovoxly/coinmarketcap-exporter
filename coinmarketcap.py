@@ -30,7 +30,7 @@ class CoinCollector():
     # add the response time as a metric
     metric.add_sample('coinmarketcap_response_time', value=float(request_time), labels={'name': 'coinmarketcap.com'})
     yield metric
-    metric = Metric('coin_market', 'coinmarketcap metric values', 'summary')
+    metric = Metric('coin_market', 'coinmarketcap metric values', 'gauge')
     for each in response:
       for that in ['rank', 'price_usd', 'price_btc', '24h_volume_usd', 'market_cap_usd', 'available_supply', 'total_supply', 'percent_change_1h', 'percent_change_24h', 'percent_change_7d']:
         coinmarketmetric = '_'.join(['coin_market', that])
