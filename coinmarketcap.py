@@ -40,14 +40,14 @@ class CoinCollector():
             for that in ['rank', 'total_supply', 'max_supply', 'circulating_supply']:
                 coinmarketmetric = '_'.join(['coin_market', that])
                 if value[that] is not None:
-                    metric.add_sample(coinmarketmetric, value=float(value[that]), labels={'id': value['id'], 'name': value['name'], 'symbol': value['symbol']})
+                    metric.add_sample(coinmarketmetric, value=float(value[that]), labels={'id': value['website_slug'], 'name': value['name'], 'symbol': value['symbol']})
             for price in ['USD', 'BTC']:
                 for that in ['price', 'volume_24h', 'market_cap', 'percent_change_1h', 'percent_change_24h', 'percent_change_7d']:
                     coinmarketmetric = '_'.join(['coin_market', that, price]).lower()
                     if value['quotes'][price] is None:
                         continue
                     if value['quotes'][price][that] is not None:
-                        metric.add_sample(coinmarketmetric, value=float(value['quotes'][price][that]), labels={'id': value['id'], 'name': value['name'], 'symbol': value['symbol']})
+                        metric.add_sample(coinmarketmetric, value=float(value['quotes'][price][that]), labels={'id': value['website_slug'], 'name': value['name'], 'symbol': value['symbol']})
         yield metric
         start += len(response['data'])
 
