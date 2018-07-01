@@ -1,0 +1,19 @@
+version: 2
+jobs:
+ build:
+   machine: true
+   steps:
+     - checkout
+     # start proprietary DB using private Docker image
+     # with credentials stored in the UI
+     - run: docker login -u $DOCKER_USER -p $DOCKER_PASS
+
+     # build the application image
+     - run: |
+         docker build -t bcawthra/coinmarketcap-exporter:${CIRCLE_BUILD_NUM} .
+         docker tag bcawthra/coinmarketcap-exporter:${CIRCLE_BUILD_NUM} bcawthra/coinmarketcap-exporter:latest
+
+     # deploy the image
+     - run: |
+         docker push bcawthra/coinmarketcap-exporter:${CIRCLE_BUILD_NUM}
+         docker push bcawthra/coinmarketcap-exporter:latest
