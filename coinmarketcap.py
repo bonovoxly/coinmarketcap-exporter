@@ -39,10 +39,10 @@ class CoinCollector():
 
 	def collect(self):
 		with lock:
+			log.info('collecting...')
 			start = 1
 			while True:
 				# query the api
-				log.info('starting with %d' % (start))
 				response = self.client.tickers(start)
 				if not response['data']:
 					break
