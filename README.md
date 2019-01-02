@@ -10,25 +10,25 @@ When running this exporter with both Prometheus and Grafana, [you can create das
 
 - Build the image:
 
-```
+```sh
 docker build -t coinmarketcap-exporter:latest .
 ```
 
 - Run it while listening on localhost:9100:
 
-```
+```sh
 docker run --rm -p 127.0.0.1:9101:9101 coinmarketcap-exporter:latest
 ```
 
 - Run it interactively:
 
-```
+```sh
 docker run --rm -it --entrypoint=/bin/bash -p 127.0.0.1:9101:9101 -v ${PWD}:/opt/coinmarketcap-exporter coinmarketcap-exporter:latest
 ```
 
 - Then to launch:
 
-```
+```sh
 python coinmarketcap.py
 ```
 
@@ -36,11 +36,11 @@ python coinmarketcap.py
 
 - In the `prometheus-compose` directory, run:
 
-```
+```sh
 docker-compose up
 ```
 
-- Go to <http://localhost:3000>.  Log in as `admin/admin`. 
+- Go to <http://localhost:3000>.  Log in as `admin/admin`.
 - To import the dashboard, click the "Home" button at the top, then on the right, click "Import Dashboard".
 - Enter `3890` in the "Grafana.com Dashboard" field.
 - Select the "prometheus" data source.
