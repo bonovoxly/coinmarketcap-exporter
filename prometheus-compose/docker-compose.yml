@@ -26,5 +26,7 @@ services:
     volumes:
       - ./init.sh:/opt/init.sh
   coinmarketcap-exporter:
+    environment:
+      - COINMARKETCAP_API_KEY=$COINMARKETCAP_API_KEY
     image: bcawthra/coinmarketcap-exporter:latest
 
