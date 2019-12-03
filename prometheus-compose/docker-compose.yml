@@ -28,5 +28,5 @@ services:
   coinmarketcap-exporter:
     environment:
       - COINMARKETCAP_API_KEY=$COINMARKETCAP_API_KEY
-    image: bcawthra/coinmarketcap-exporter:latest
+    image: coinmarketcap-exporter:latest
 
