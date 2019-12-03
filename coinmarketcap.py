@@ -1,10 +1,12 @@
 from prometheus_client import start_http_server, Metric, REGISTRY
 from threading import Lock
 from cachetools import cached, TTLCache
+from requests import Request, Session
+from requests.exceptions import ConnectionError, Timeout, TooManyRedirects
 import argparse
 import json
 import logging
-import requests
+import os
 import sys
 import time
 
@@ -23,15 +25,22 @@ formatter = logging.Formatter('%(asctime)s - %(name)s - %(levelname)s - %(messag
 ch.setFormatter(formatter)
 log.addHandler(ch)
 
+cak = os.environ.get('COINMARKETCAP_API_KEY')
 
 class CoinClient():
 	def __init__(self):
-		self.endpoint = 'https://api.coinmarketcap.com/v2/ticker/'
+		self.url = 'https://pro-api.coinmarketcap.com/v1/cryptocurrency/listings/latest'
+		self.headers = {'Accepts': 'application/json', 'X-CMC_PRO_API_KEY': cak}
+		self.parameters = {'start': '1', 'limit': '5000', 'convert': 'USD'}
 
 	@cached(cache)
 	def tickers(self, start):
-		r = requests.get('%s?convert=BTC&start=%d' % (self.endpoint, start))
-		return json.loads(r.content.decode('UTF-8'))
+		session = Session()
+		session.headers.update(self.headers)
+		r = session.get(self.url, params=self.parameters)
+		data = json.loads(r.text)
+		print(data)
+		return data
 
 class CoinCollector():
 	def __init__(self):
