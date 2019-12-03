@@ -11,9 +11,13 @@ jobs:
      # build the application image
      - run: |
          docker build -t bcawthra/coinmarketcap-exporter:${CIRCLE_BUILD_NUM} .
-         docker tag bcawthra/coinmarketcap-exporter:${CIRCLE_BUILD_NUM} bcawthra/coinmarketcap-exporter:latest
+         docker tag bcawthra/coinmarketcap-exporter:${CIRCLE_BUILD_NUM} bcawthra/coinmarketcap-exporter:${CIRCLE_BRANCH}
 
      # deploy the image
      - run: |
          docker push bcawthra/coinmarketcap-exporter:${CIRCLE_BUILD_NUM}
-         docker push bcawthra/coinmarketcap-exporter:latest
+         docker push bcawthra/coinmarketcap-exporter:${CIRCLE_BRANCH}
+         if [ "${CIRCLE_BRANCH}" == "master" ]; then
+           docker tag bcawthra/coinmarketcap-exporter:${CIRCLE_BUILD_NUM} bcawthra/coinmarketcap-exporter:latest
+           docker push bcawthra/coinmarketcap-exporter:latest
+         fi 
