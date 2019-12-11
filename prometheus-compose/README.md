@@ -2,12 +2,14 @@
 
 This docker-compose file initializes a Prometheus and Grafana stack, including the coinmarketcap exporter. It uses localhost ports 3000 and 9090.
 
+Note, this compose passes in the `COINMARKETCAP_API_KEY` environment variable, which needs to be created from <https://pro.coinmarketcap.com/features>.
+
 To use:
 
 - Start the docker-compose stack:
 
 ```
-docker-compose up
+COINMARKETCAP_API_KEY=1234-5678-90-1234 docker-compose up
 ```
 
 - Go to <http://localhost:3000>.  Log in as `admin/admin`. 
