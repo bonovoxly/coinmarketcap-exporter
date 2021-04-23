@@ -23,7 +23,7 @@ docker run --rm -p 127.0.0.1:9101:9101 coinmarketcap-exporter:latest
 - Run it interactively:
 
 ```sh
-docker run --rm -it --entrypoint=/bin/bash -p 127.0.0.1:9101:9101 -v ${PWD}:/opt/coinmarketcap-exporter coinmarketcap-exporter:latest
+docker run --rm -it --entrypoint=/bin/sh -p 127.0.0.1:9101:9101 -v ${PWD}:/opt/coinmarketcap-exporter coinmarketcap-exporter:latest
 ```
 
 - Then to launch:
