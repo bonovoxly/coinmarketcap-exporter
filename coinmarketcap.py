@@ -47,6 +47,7 @@ class CoinClient():
     if 'data' not in data:
       log.error('No data in response. Is your API key set?')
       log.info(data)
+    data['timestamp'] = time.time()
     return data
 
 class CoinCollector():
@@ -66,14 +67,14 @@ class CoinCollector():
           for that in ['cmc_rank', 'total_supply', 'max_supply', 'circulating_supply']:
             coinmarketmetric = '_'.join(['coin_market', that])
             if value[that] is not None:
-              metric.add_sample(coinmarketmetric, value=float(value[that]), labels={'id': value['slug'], 'name': value['name'], 'symbol': value['symbol']})
+              metric.add_sample(coinmarketmetric, value=float(value[that]), labels={'id': value['slug'], 'name': value['name'], 'symbol': value['symbol']}, timestamp=response['timestamp'])
           for price in [currency]:
             for that in ['price', 'volume_24h', 'market_cap', 'percent_change_1h', 'percent_change_24h', 'percent_change_7d']:
               coinmarketmetric = '_'.join(['coin_market', that, price]).lower()
               if value['quote'][price] is None:
                 continue
               if value['quote'][price][that] is not None:
-                metric.add_sample(coinmarketmetric, value=float(value['quote'][price][that]), labels={'id': value['slug'], 'name': value['name'], 'symbol': value['symbol']})
+                metric.add_sample(coinmarketmetric, value=float(value['quote'][price][that]), labels={'id': value['slug'], 'name': value['name'], 'symbol': value['symbol']}, timestamp=response['timestamp'])
       yield metric
 
 if __name__ == '__main__':
