@@ -14,7 +14,7 @@ When running this exporter with both Prometheus and Grafana, [you can create das
 docker build -t coinmarketcap-exporter:latest .
 ```
 
-- Run it while listening on localhost:9100:
+- Run it while listening on localhost:9101:
 
 ```sh
 docker run --rm -p 127.0.0.1:9101:9101 coinmarketcap-exporter:latest
